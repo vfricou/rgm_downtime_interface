@@ -1,2 +1,48 @@
-div
-  h1 Coucou
+div.ui.divider
+  h1.ui.center.aligned.header
+    = t('title')
+
+  table.ui.celled.padded
+    thead
+      tr
+        th.rgm
+          = t('form_app')
+        th.rgm
+          = t('form_dwt_cause')
+        th.rgm
+          = t('form_dwt_start')
+        th.rgm
+          = t('form_dwt_end')
+        th.rgm
+    tbody
+      tr
+        td
+          h2.ui.center.aligned.header App
+        td
+          div.ui.form
+            div.field
+              textarea# name="description" cols="120" rows="1"
+        td
+          div.ui.input
+            input.datetimepicker type="text"
+        td
+          div.ui.input
+            input.datetimepicker type="text"
+        td colspan="5"
+          button.ui.blue.button Apply
+          button.ui.grey.button View
+          button.ui.grey.button Conf
+      tr
+        td
+          h2.ui.center.aligned.header App2
+        td
+          div.ui.form
+            div.field
+              textarea# name="description" cols="120" rows="1"
+        td
+          h2 rating
+        td.right.aligned 80
+        td colspan="5"
+          button.ui.blue.button Apply
+          button.ui.grey.button View
+          button.ui.grey.button Conf
