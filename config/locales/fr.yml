@@ -29,6 +29,9 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
-  title: 'RGM application downtime declaration'
+fr:
+  title: 'Application de déclaration de maintenance pour RGM'
+  form_app: 'Application'
+  form_dwt_cause: 'Description de la maintenance'
+  form_dwt_start: 'Début de la maintenance'
+  form_dwt_end: 'Fin de la maintenance'
