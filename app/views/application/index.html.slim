@@ -2,7 +2,10 @@ div.ui.divider
   h1.ui.center.aligned.header
     = t('title')
 
-  table.ui.celled.padded
+  div class="input-group"
+    input type="text" class="form-control datepicker" placeholder="Username" aria-describedby="basic-addon1"
+
+  table.table.table-striped
     thead
       tr
         th.rgm
@@ -21,13 +24,13 @@ div.ui.divider
         td
           div.ui.form
             div.field
-              textarea# name="description" cols="120" rows="1"
+              textarea name="description" cols="120" rows="1"
         td
           div.ui.input
-            input.datetimepicker type="text"
+            input.datepicker type="text"
         td
           div.ui.input
-            input.datetimepicker type="text"
+            input.datepicker type="text"
         td colspan="5"
           button.ui.blue.button Apply
           button.ui.grey.button View
@@ -38,7 +41,7 @@ div.ui.divider
         td
           div.ui.form
             div.field
-              textarea# name="description" cols="120" rows="1"
+              textarea name="description" cols="120" rows="1"
         td
           h2 rating
         td.right.aligned 80
