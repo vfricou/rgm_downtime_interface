@@ -12,6 +12,12 @@ html lang="fr"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
   body
-    == yield
+    div.ui.fixed.inverted.menu
+      div class="ui container"
+        a href="#" class="header item" RGM Downtime Interface
+        a href="#" class="item" Home
+
+    div.ui.main.container
+      == yield
 
   = javascript_pack_tag 'application'
