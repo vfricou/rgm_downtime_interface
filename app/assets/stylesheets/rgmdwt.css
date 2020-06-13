@@ -9,3 +9,9 @@ body {
     margin: 5em 0em 0em;
     padding: 5em 0em;
 }
+.ui.table>thead>tr>th {
+    background-color: #286090;
+    color: #fff;
+    height: 3em;
+    text-align: center;
+}
