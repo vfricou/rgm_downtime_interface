@@ -16,34 +16,23 @@ div.ui
           = t('form_dwt_end')
         th.rgm
     tbody
-      tr
-        td
-          h2.ui.center.aligned.header App
-        td
-          div.ui.form
-            div.field
-              textarea name="description" cols="120" rows="1"
-        td
-          div.ui.input
-            input.datepicker type="text"
-        td
-          div.ui.input
-            input.datepicker type="text"
-        td colspan="5"
-          button.ui.blue.button Apply
-          button.ui.grey.button View
-          button.ui.grey.button Conf
-      tr
-        td
-          h2.ui.center.aligned.header App2
-        td
-          div.ui.form
-            div.field
-              textarea name="description" cols="120" rows="1"
-        td
-          h2 rating
-        td.right.aligned 80
-        td colspan="5"
-          button.ui.blue.button Apply
-          button.ui.grey.button View
-          button.ui.grey.button Conf
+      - Rgmdwt::Configuration.list_apps.each do |line|
+        tr
+          td
+            h2.ui.center.aligned.header
+              = line['displayname']
+          td
+            div.ui.form
+              div.field
+                textarea name="description" cols="120" rows="1"
+          td
+            div.ui.input
+              input.datepicker type="text"
+          td
+            div.ui.input
+              input.datepicker type="text"
+          td colspan="5"
+            div.ui.three.buttons
+              button.ui.blue.button Apply
+              button.ui.grey.button View
+              //= link_to '<i class="fas fa-eye"></i>'.html_safe, Rgmdwt::Configuration.get_config('test') , class: 'ui grey button'
