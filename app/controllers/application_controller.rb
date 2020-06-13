@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
-  around_action :switch_locale
-
   def index
   end
+  
+  def view_conf
+    @app_config = Rgmdwt::Configuration.get_config(params[:id])
+  end
+  
+  around_action :switch_locale
 
   protected
 

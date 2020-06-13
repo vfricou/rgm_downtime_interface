@@ -14,6 +14,9 @@ module RgmDowntimeInterface
     # Autoload lib/ folder including all subdirectories
     config.eager_load_paths << Rails.root.join('lib')
 
+    # Load custom configurations
+    config.rgmdwt = config_for(:rgmdwt)
+
     # Set locale
     I18n.available_locales = %i[en fr]
     I18n.default_locale = :fr

@@ -1,0 +1,5 @@
+---
+production:
+  app_config: <%= ENV.fetch("RGMDWT_APP_PATH") { 'app_configs' } %>
+development:
+  app_config: <%= ENV.fetch("RGMDWT_APP_PATH") { 'app_configs' } %>

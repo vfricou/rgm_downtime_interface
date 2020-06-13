@@ -30,10 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 fr:
-  title: 'Interface de maintance RGM'
+  title: 'Interface de maintenance RGM'
   home: 'Accueil'
   form_app: 'Application'
   form_dwt_cause: 'Description de la maintenance'
   form_dwt_start: 'Début de la maintenance'
   form_dwt_end: 'Fin de la maintenance'
   config_page_title: 'Configuration de l’application'
+  view_app_level: 'Niveau de l’application'
+  view_app_name: 'Nom de l’application'
+  view_host_name: 'Nom de la machine'
+  view_host_svc: 'Nom du service'
