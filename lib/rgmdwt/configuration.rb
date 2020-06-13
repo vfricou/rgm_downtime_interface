@@ -10,9 +10,9 @@ module Rgmdwt
       config_array
     end
 
-    def self.get_config(app_name)
-      config_file = Rails.root.join(Rails.configuration.rgmdwt[:app_config]) + "#{app_name}.yml"
-      #puts config_file.inspect
+    def self.get_config(app_file)
+      config_file = Rails.root.join(Rails.configuration.rgmdwt[:app_config]) + app_file
+      puts config_file.inspect
       yamlContent = YAML.load_file(config_file)
       #puts yamlContent.inspect
       #return yamlContent
