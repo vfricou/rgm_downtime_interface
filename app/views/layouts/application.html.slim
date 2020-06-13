@@ -14,8 +14,10 @@ html lang="fr"
   body
     div.ui.fixed.inverted.menu
       div class="ui container"
-        a href="/" class="header item" RGM Downtime Interface
-        a href="/" class="item" Home
+        a href="/" class="header item"
+          = t('title')
+        a href="/" class="item"
+          = t('home')
 
     div.ui.main.container
       == yield
