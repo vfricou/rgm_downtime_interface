@@ -1,38 +1,50 @@
-br
-div.ui
-  h1.ui.center.aligned.header
-    = t('title')
+h1.ui.center.aligned.header
+  = t('title')
 
-  table.table.table-striped
-    thead
+table.ui.table.table-striped.datatable
+  thead
+    tr
+      th.rgm = t('form_app')
+      th.rgm = t('form_dwt_cause')
+      th.rgm = t('form_dwt_start')
+      th.rgm = t('form_dwt_end')
+      th.rgm
+  tbody
+    - Rgmdwt::Configuration.list_apps.each do |line|
       tr
-        th.rgm
-          = t('form_app')
-        th.rgm
-          = t('form_dwt_cause')
-        th.rgm
-          = t('form_dwt_start')
-        th.rgm
-          = t('form_dwt_end')
-        th.rgm
-    tbody
-      - Rgmdwt::Configuration.list_apps.each do |line|
-        tr
-          td
-            h2.ui.center.aligned.header
-              = line['displayname']
-          td
-            div.ui.form
-              div.field
-                textarea name="description" cols="120" rows="1"
-          td
-            div.ui.input
-              input.datepicker type="text"
-          td
-            div.ui.input
-              input.datepicker type="text"
-          td colspan="5"
-            div.ui.three.buttons
-              button.ui.blue.button Apply
-              button.ui.grey.button View
-              = link_to '<i class="fas fa-eye"></i>'.html_safe, view_config_path('1'), class: 'ui grey button'
+        td
+          h2.ui.center.aligned.header = line['displayname']
+        td
+          div.ui.form
+            div.field
+              textarea name="description" rows="1"
+        td
+          div.ui.input
+            div.ui.left.icon.input
+              input.datepicker type="text" placeholder="Pick time..."
+              i.calendar.times.outline.icon
+        td
+          div.ui.input
+            div.ui.left.icon.input
+              input.datepicker type="text" placeholder="Pick time..."
+              i.calendar.check.outline.icon
+        td colspan="5"
+          div.ui.buttons
+            button.ui.blue.button Apply
+            button.ui.grey.button View
+            button.ui.grey.button Conf
+      tr
+        td
+          h2.ui.center.aligned.header App2
+        td
+          div.ui.form
+            div.field
+              textarea name="description" cols="120" rows="1"
+        td
+          h2 rating
+        td.right.aligned 80
+        td colspan="5"
+          div.ui.three.buttons
+            button.ui.blue.button Apply
+            button.ui.grey.button View
+            = link_to '<i class="fas fa-eye"></i>'.html_safe, view_config_path('1'), class: 'ui grey button'
