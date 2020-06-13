@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 fr:
-  title: 'Interface de maintance RGM'
+  title: 'Interface de maintenance RGM'
   home: 'Accueil'
   form_app: 'Application'
   form_dwt_cause: 'Description de la maintenance'
