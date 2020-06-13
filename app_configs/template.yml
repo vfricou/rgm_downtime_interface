@@ -1,0 +1,15 @@
+displayname: "Template configuration"
+app:
+  - host: Applications_BP
+    service: Template
+hosts:
+  - host: localhost
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_childs: false
+  - host: test-host
+    propagation_childs: false
