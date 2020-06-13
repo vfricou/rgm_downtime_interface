@@ -3,3 +3,14 @@ br
 div.ui
   h1.ui.center.aligned.header
     = t('config_page_title')
+
+= app_config = Rgmdwt::Configuration.get_config(id)
+
+table.ui.table.table-striped.datatable
+  thead
+    tr
+      th.rgm = t('form_app')
+      th.rgm = t('form_dwt_cause')
+      th.rgm = t('form_dwt_start')
+      th.rgm = t('form_dwt_end')
+      th.rgm
