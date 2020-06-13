@@ -22,7 +22,8 @@
 /storage/*
 !/storage/.keep
 
-/public/assets
+/public/assets/*
+!/public/assets/themes/
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
@@ -38,3 +39,5 @@ yarn-debug.log*
 # Custom
 .history
 .idea
+
+rgm_downtime_interface.iml
