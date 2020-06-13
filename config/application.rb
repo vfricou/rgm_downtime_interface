@@ -14,6 +14,10 @@ module RgmDowntimeInterface
     # Autoload lib/ folder including all subdirectories
     config.eager_load_paths << Rails.root.join('lib')
 
+    # Set locale
+    I18n.available_locales = %i[en fr]
+    I18n.default_locale = :fr
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
