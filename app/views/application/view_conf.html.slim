@@ -1,16 +1,39 @@
 br
-br
 div.ui
   h1.ui.center.aligned.header
-    = t('config_page_title')
+    = "#{t('config_page_title')} #{@app_config['displayname']}"
 
-= app_config = Rgmdwt::Configuration.get_config(id)
-
-table.ui.table.table-striped.datatable
+table.ui.celled.table
   thead
     tr
-      th.rgm = t('form_app')
-      th.rgm = t('form_dwt_cause')
-      th.rgm = t('form_dwt_start')
-      th.rgm = t('form_dwt_end')
-      th.rgm
+      th = t('view_app_level')
+      th = t('view_app_name')
+  tbody
+    - @app_config['app'].each do |app|
+      tr
+        td
+          = app['host']
+        td
+          = app['service']
+
+hr
+
+table.ui.celled.table.datatable
+  thead
+    tr
+      th = t('view_host_name')
+      th = t('view_host_svc')
+    tbody
+      - @app_config['hosts'].each do |host|
+        - unless host['services'].nil?
+          - host['services'].each do |service|
+            tr
+              td
+                = host['host']
+              td
+                = service
+        - else
+          tr
+            td
+              = host['host']
+            td = '-'

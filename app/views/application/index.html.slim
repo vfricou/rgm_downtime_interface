@@ -4,11 +4,11 @@ h1.ui.center.aligned.header
 table.ui.table.table-striped.datatable
   thead
     tr
-      th.rgm = t('form_app')
-      th.rgm = t('form_dwt_cause')
-      th.rgm = t('form_dwt_start')
-      th.rgm = t('form_dwt_end')
-      th.rgm
+      th = t('form_app')
+      th = t('form_dwt_cause')
+      th = t('form_dwt_start')
+      th = t('form_dwt_end')
+      th
   tbody
     - Rgmdwt::Configuration.list_apps.each do |line|
       tr
@@ -32,4 +32,4 @@ table.ui.table.table-striped.datatable
           div.ui.buttons
             button.ui.blue.button Apply
             button.ui.grey.button View
-            = link_to '<i class="file alternate icon"></i>'.html_safe, view_config_path(line[:file_name]), class: 'ui grey button'
+            = link_to '<i class="file alternate icon"></i>'.html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
