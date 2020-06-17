@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     @app_config = Rgmdwt::Configuration.get_config(params[:id])
   end
 
+  def appli_dwt
+    @app_config = Rgmdwt::Api.set_downtime(params[:id])
+  end
+
   protected
 
   def switch_locale(&action)
