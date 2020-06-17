@@ -30,6 +30,8 @@ table.ui.table.table-striped.datatable
               i.calendar.check.outline.icon
         td colspan="5"
           div.ui.buttons
-            button.ui.blue.button Apply
-            button.ui.grey.button View
+            button.ui.blue.button
+              i.check.icon
+            button.ui.grey.button
+              i.eye.icon
             = link_to '<i class="file alternate icon"></i>'.html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
