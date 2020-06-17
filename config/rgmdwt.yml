@@ -1,5 +1,11 @@
 ---
 production:
   app_config: <%= ENV.fetch("RGMDWT_APP_PATH") { 'app_configs' } %>
+  api_server: <%= ENV.fetch("RGMDWT_API_SERVER") { '192.168.56.101' } %>
+  api_username: <%= ENV.fetch("RGMDWT_API_USERNAME") { 'admin' } %>
+  api_password: <%= ENV.fetch("RGMDWT_API_PASSWORD") { 'admin' } %>
 development:
   app_config: <%= ENV.fetch("RGMDWT_APP_PATH") { 'app_configs' } %>
+  api_server: <%= ENV.fetch("RGMDWT_API_SERVER") { '192.168.56.101' } %>
+  api_username: <%= ENV.fetch("RGMDWT_API_USERNAME") { 'admin' } %>
+  api_password: <%= ENV.fetch("RGMDWT_API_PASSWORD") { 'admin' } %>
