@@ -32,6 +32,7 @@ table.ui.table.table-striped.datatable
           div.ui.buttons
             button.ui.blue.button
               i.check.icon
+            //= link_to '<i class="check icon"></i>'.html_safe, appli_dwt(line[:file_name]), class: 'ui blue button'
             button.ui.grey.button
               i.eye.icon
             = link_to '<i class="file alternate icon"></i>'.html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
