@@ -17,7 +17,7 @@ html lang="fr"
         = link_to t('title'), root_path, class: 'header item'
         = link_to t('home'), root_path, class: 'item'
 
-    div.ui.main.container
+    div.ui.main.container.fluid
       == yield
 
   = javascript_pack_tag 'application'

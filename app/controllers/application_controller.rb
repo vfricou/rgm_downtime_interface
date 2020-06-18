@@ -9,7 +9,33 @@ class ApplicationController < ActionController::Base
   end
 
   def appli_dwt
-    @app_config = Rgmdwt::Api.create_downtime(params[:id],params[:form])
+    target = Rgmdwt::Configuration.get_config(params[:id])
+    target['app'].each do |app|
+      Rgmdwt::Api.new(
+        params[:description].first,
+        DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+        DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S'),
+        app['host'],
+        app['service']
+      ).create_downtime('service')
+    end
+    target['hosts'].each do |host|
+      Rgmdwt::Api.new(
+        params[:description].first,
+        DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+        DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S'),
+        host['host']
+      ).create_downtime('host')
+      host['services']&.each do |service|
+        Rgmdwt::Api.new(
+          params[:description].first,
+          DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+          DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S'),
+          host['host'],
+          service
+        ).create_downtime('service')
+      end
+    end
   end
 
   protected
