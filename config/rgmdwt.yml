@@ -1,4 +1,7 @@
 ---
+default: &default
+  submit_user: <%= ENV.fetch("RGMDWT_SUBMIT_USER") { 'Robot' } %>
+
 production:
   app_config: <%= ENV.fetch("RGMDWT_APP_PATH") { 'app_configs' } %>
   api_server: <%= ENV.fetch("RGMDWT_API_SERVER") { '192.168.56.101' } %>
