@@ -36,6 +36,8 @@ class ApplicationController < ActionController::Base
         ).create_downtime('service')
       end
     end
+
+    redirect_to view_conf_path(params[:id]), notice: 'Downtime was successfully created.'
   end
 
   protected
