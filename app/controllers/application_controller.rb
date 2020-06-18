@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def appli_dwt
-    @app_config = Rgmdwt::Api.set_downtime(params[:id])
+    @app_config = Rgmdwt::Api.set_downtime(params[:id],params[:form])
   end
 
   protected
