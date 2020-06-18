@@ -1,60 +1,37 @@
 module Rgmdwt
   class Api
-    def self.init_token
-      getTokenURL = "https://#{Rails.configuration.rgmdwt[:api_server]}/rgmapi/getAuthToken?&username=#{Rails.configuration.rgmdwt[:api_username]}&password=#{Rails.configuration.rgmdwt[:api_password]}"
-
-      jsonGetToken = JSON.parse(
+    def self.build_payload(comment, start_time, end_time, hostname, service = nil)
+      payload = {
+          comment: comment,
+          startTime: start_time,
+          endTime: end_time,
+          fixed: '1',
+          user: Rails.configuration.rgmdwt[:submit_user],
+          hostName: hostname
+      }
+​
+      payload.merge!({ serviceName: service }) unless service.nil?
+​
+      payload
+    end
+​
+    def self.create_downtime(type, payload = {})
+      rgmapi_endpoint = type == 'service' ? 'createServiceDowntime' : 'createHostDowntime'
+      rgmapi_url = "https://#{Rails.configuration.rgmdwt[:api_server]}/rgmapi/#{rgmapi_endpoint}?token=#{self.api_token}"
+​
+      api_endpoint = RestClient::Resource.new(rgmapi_url, verify_ssl: OpenSSL::SSL::VERIFY_NONE)
+      api_endpoint.post(payload.to_json, { content_type: 'application/json' })
+    end
+​
+    private
+​
+    def self.api_token
+      JSON.parse(
         RestClient::Resource.new(
-          getTokenURL,
-          :verify_ssl =>  OpenSSL::SSL::VERIFY_NONE
+          "https://#{Rails.configuration.rgmdwt[:api_server]}/rgmapi/getAuthToken?&username=#{Rails.configuration.rgmdwt[:api_username]}&password=#{Rails.configuration.rgmdwt[:api_password]}",
+          verify_ssl: OpenSSL::SSL::VERIFY_NONE
         ).get().body
-      )
-      return jsonGetToken['RGMAPI_TOKEN']
-    end
-    def self.create_host_downtime(comment,startDT,endDT,user,host)
-      api_token = self.init_token
-      createHostDwtURL = "https://#{Rails.configuration.rgmdwt[:api_server]}/rgmapi/createHostDowntime?token=#{api_token}"
-
-      payload = {
-        "comment"=>"#{comment}",
-        "startTime"=>"#{startDT}",
-        "endTime"=>"#{endDT}",
-        "fixed"=>"1",
-        "user"=>"#{user}",
-        "hostName"=>"#{host}"
-      }
-
-      post_host_state = RestClient::Resource.new(
-		    createHostDwtURL,
-		    :verify_ssl =>  OpenSSL::SSL::VERIFY_NONE
-	    ).post(
-        payload.to_json, {
-          content_type: 'application/json'
-        }
-      )
-    end
-    def self.create_service_downtime(comment,startDT,endDT,user,host,service)
-      api_token = self.init_token
-      createHostDwtURL = "https://#{Rails.configuration.rgmdwt[:api_server]}/rgmapi/createServiceDowntime?token=#{api_token}"
-
-      payload = {
-        "comment"=>"#{comment}",
-        "startTime"=>"#{startDT}",
-        "endTime"=>"#{endDT}",
-        "fixed"=>"1",
-        "user"=>"#{user}",
-        "hostName"=>"#{host}",
-        "serviceName"=>"#{service}"
-      }
-
-      post_host_state = RestClient::Resource.new(
-		    createHostDwtURL,
-		    :verify_ssl =>  OpenSSL::SSL::VERIFY_NONE
-	    ).post(
-        payload.to_json, {
-          content_type: 'application/json'
-        }
-      )
+      )['RGMAPI_TOKEN']
     end
   end
 end
