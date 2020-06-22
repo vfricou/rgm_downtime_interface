@@ -1,37 +1,43 @@
 h1.ui.center.aligned.header
   = t('title')
 
-table.ui.table.table-striped.datatable
+table.ui.table.table-striped
   thead
     tr
-      th = t('form_app')
-      th = t('form_dwt_cause')
-      th = t('form_dwt_start')
-      th = t('form_dwt_end')
-      th
+      th = t('t_head_app')
+      th.left = t('t_head_description')
   tbody
+    //Rgmdwt::Api.init_token
+    //Rgmdwt::Api.create_host_downtime
+    //Rgmdwt::Api.create_service_downtime('titi','18-10-2020 11:30:00','18-10-2020 11:31:00','Robot','rgm.fricouv.loc','memory')
     - Rgmdwt::Configuration.list_apps.each do |line|
       tr
         td
           h3.ui.center.aligned.header = line['displayname']
         td
-          div.ui.input
-            div.field
-              textarea name="description" rows="2" placeholder=t('desc_placeholder')
-        td
-          div.ui.input
-            div.ui.left.icon.input
-              input.datepicker type="text" placeholder=t('time_pick_placeholder')
-              i.calendar.times.outline.icon
-        td
-          div.ui.input
-            div.ui.left.icon.input
-              input.datepicker type="text" placeholder=t('time_pick_placeholder')
-              i.calendar.check.outline.icon
-        td colspan="5"
-          div.ui.buttons
-            button.ui.blue.button
-              i.check.icon
-            button.ui.grey.button
-              i.eye.icon
-            = link_to '<i class="file alternate icon"></i>'.html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
+          = form_with(url: appli_dwt_url(line[:file_name]), method: 'post', class: 'ui form') do |f|
+            div class="ui horizontal basic segments"
+              div class="ui segment"
+                div.field
+                  = label :description, t('form_dwt_cause')
+                  = text_area :description, nil, placeholder: t('desc_placeholder').to_s, rows: 4
+              div class="ui segment"
+                div.field
+                  = label :startdate, t('form_dwt_start')
+                  div.ui.left.icon.input
+                    = f.text_field :startdate, class: 'form-control datepicker', placeholder: t('time_pick_placeholder')
+                    i.calendar.times.outline.icon
+                div.field
+                  = label :enddate, t('form_dwt_end')
+                  div.ui.left.icon.input
+                    = f.text_field :enddate, class: 'form-control datepicker', placeholder: t('time_pick_placeholder')
+                    i.calendar.check.outline.icon
+              div class="ui segment"
+                div.ui.vertical.labeled.icon.buttons
+                  = button_tag(type: "submit", class: "ui blue button") do
+                    i.check.icon
+                    = t('form_btn_apply')
+                  button.ui.grey.button
+                    i.eye.icon
+                    = t('form_btn_view')
+                  = link_to "<i class='file alternate icon'></i>#{t('form_btn_config')}".html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
