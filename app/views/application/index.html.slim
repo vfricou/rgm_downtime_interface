@@ -1,7 +1,7 @@
 h1.ui.center.aligned.header
   = t('title')
 
-table.ui.table.table-striped
+table.ui.table.table-striped.datatable
   thead
     tr
       th = t('t_head_app')
@@ -37,7 +37,5 @@ table.ui.table.table-striped
                   = button_tag(type: "submit", class: "ui blue button") do
                     i.check.icon
                     = t('form_btn_apply')
-                  button.ui.grey.button
-                    i.eye.icon
-                    = t('form_btn_view')
+                  = link_to "<i class='eye icon'></i>#{t('form_btn_view')}".html_safe, view_dwt_path(line[:file_name]), class: 'ui grey button'
                   = link_to "<i class='file alternate icon'></i>#{t('form_btn_config')}".html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'

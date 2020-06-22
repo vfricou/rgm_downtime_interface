@@ -1,0 +1,65 @@
+div.ui
+  h1.ui.center.aligned.header
+    = "#{t('config_page_title')} #{@app_config['displayname']}"
+
+table.ui.celled.table
+  thead
+    tr
+      th = t('view_app_level')
+      th = t('view_app_name')
+      th = t('view_entry_time')
+      th = t('view_start_time')
+      th = t('view_end_time')
+  tbody
+    - @app_config['app'].each do |app|
+      - @dwt_entry = Rgmdwt::Listnagiosobject.get_downtime(app['host'],app['service'])
+      tr
+        td
+          = app['host']
+        td
+          = app['service']
+        td
+          = DateTime.strptime((@dwt_entry['entry_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+        td
+          = DateTime.strptime((@dwt_entry['start_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+        td
+          = DateTime.strptime((@dwt_entry['end_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+
+hr
+
+table.ui.celled.table.datatable
+  thead
+    tr
+      th = t('view_host_name')
+      th = t('view_host_svc')
+      th = t('view_entry_time')
+      th = t('view_start_time')
+      th = t('view_end_time')
+    tbody
+      - @app_config['hosts'].each do |host|
+        - unless host['services'].nil?
+          - host['services'].each do |service|
+            - @dwt_entry = Rgmdwt::Listnagiosobject.get_downtime(host['host'],service)
+            tr
+              td
+                = host['host']
+              td
+                = service
+              td
+                = DateTime.strptime((@dwt_entry['entry_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+              td
+                = DateTime.strptime((@dwt_entry['start_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+              td
+                = DateTime.strptime((@dwt_entry['end_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+        - else
+          tr
+            td
+              = host['host']
+            td
+              = '-'
+            td
+              = DateTime.strptime((@dwt_entry['entry_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+            td
+              = DateTime.strptime((@dwt_entry['start_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
+            td
+              = DateTime.strptime((@dwt_entry['end_time']).to_s, '%s').strftime("%d/%m/%Y %H:%M %z").in_time_zone(Rails.configuration.rgmdwt[:timezone]) unless @dwt_entry.nil?
