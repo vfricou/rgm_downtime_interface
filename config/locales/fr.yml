@@ -45,5 +45,8 @@ fr:
   view_app_name: 'Nom de l’application'
   view_host_name: 'Nom de la machine'
   view_host_svc: 'Nom du service'
+  view_entry_time: 'Date de déclaration'
+  view_start_time: 'Date de début'
+  view_end_time: 'Date de fin'
   desc_placeholder: 'Description de la maintenance'
   time_pick_placeholder: 'Sélectionnez une date/heure...'

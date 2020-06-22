@@ -40,6 +40,10 @@ class ApplicationController < ActionController::Base
     redirect_to view_conf_path(params[:id]), notice: 'Downtime was successfully created.'
   end
 
+  def view_dwt
+    @app_config = Rgmdwt::Configuration.get_config(params[:id])
+  end
+
   protected
 
   def switch_locale(&action)

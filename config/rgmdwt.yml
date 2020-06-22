@@ -8,6 +8,8 @@ default: &default
 
 production:
   <<: *default
+  timezone: <%= ENV.fetch("TZ") { 'Europe/Paris' } %>
 
 development:
   <<: *default
+  timezone: <%= ENV.fetch("TZ") { 'Europe/Paris' } %>
