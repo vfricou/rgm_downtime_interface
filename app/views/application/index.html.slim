@@ -7,9 +7,6 @@ table.ui.table.table-striped.datatable
       th = t('t_head_app')
       th.left = t('t_head_description')
   tbody
-    //Rgmdwt::Api.init_token
-    //Rgmdwt::Api.create_host_downtime
-    //Rgmdwt::Api.create_service_downtime('titi','18-10-2020 11:30:00','18-10-2020 11:31:00','Robot','rgm.fricouv.loc','memory')
     - Rgmdwt::Configuration.list_apps.each do |line|
       tr
         td
@@ -34,7 +31,7 @@ table.ui.table.table-striped.datatable
                     i.calendar.check.outline.icon
               div class="ui segment"
                 div.ui.vertical.labeled.icon.buttons
-                  = button_tag(type: "submit", class: "ui blue button") do
+                  = button_tag(type: "submit", class: "ui button rgm") do
                     i.check.icon
                     = t('form_btn_apply')
                   = link_to "<i class='eye icon'></i>#{t('form_btn_view')}".html_safe, view_dwt_path(line[:file_name]), class: 'ui grey button'

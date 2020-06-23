@@ -20,3 +20,16 @@ body {
     text-align: left;
     padding-left: 22%;
 }
+.ui.menu.rgm{
+  background-color: #286090;
+  color: #fff;
+  height: 3em;
+}
+.ui.menu .rgm{
+  color: #fff;
+}
+
+.ui.buttons .rgm{
+  background-color: #286090;
+  color: #fff;
+}

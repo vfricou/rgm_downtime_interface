@@ -12,10 +12,11 @@ html lang="fr"
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
   body
-    div.ui.fixed.inverted.menu
-      div class="ui container"
-        = link_to t('title'), root_path, class: 'header item'
-        = link_to t('home'), root_path, class: 'item'
+    div.ui.menu.rgm
+      div.header.item.rgm
+        = link_to t('title'), root_path, class: 'header item rgm'
+      a
+        = link_to t('home'), root_path, class: 'item rgm'
 
     div.ui.main.container.fluid
       == yield
