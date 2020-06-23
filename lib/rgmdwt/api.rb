@@ -3,13 +3,10 @@ module Rgmdwt
     def self.create_downtime(comment, start_time, end_time, hostname, service = nil)
       rgmapi_endpoint = service.nil? ? 'createHostDowntime' : 'createServiceDowntime'
       @payload = Utils.dwt_payload(comment, start_time, end_time, hostname, service)
-      puts @payload.inspect
       api_request = RestClient::Resource.new(
         "https://#{Rails.configuration.rgmdwt[:api_server]}/rgmapi/#{rgmapi_endpoint}?token=#{Utils.api_token}",
         verify_ssl: OpenSSL::SSL::VERIFY_NONE
       ).post(@payload.to_json, { content_type: 'application/json' })
-
-      puts JSON.parse(api_request).inspect
     end
 
     def self.get_downtime(hostname, service = nil)
@@ -31,7 +28,6 @@ module Rgmdwt
               verify_ssl: OpenSSL::SSL::VERIFY_NONE
           ).post(@request.to_json, { content_type: 'application/json' }).body
       )
-      puts dwt_entry.inspect
       unless dwt_entry['result']['default'].first.nil?
         return dwt_entry['result']['default'].first
       end
@@ -49,6 +45,7 @@ module Rgmdwt
           hostName: hostname
       }
       @payload.merge!({ serviceName: service }) unless service.nil?
+      return @payload
     end
 
     def self.api_token
