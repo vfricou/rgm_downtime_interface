@@ -12,7 +12,7 @@ table.ui.celled.table
       th = t('view_end_time')
   tbody
     - @app_config['app'].each do |app|
-      - @dwt_entry = Rgmdwt::Listnagiosobject.get_downtime(app['host'],app['service'])
+      - @dwt_entry = Rgmdwt::Api.get_downtime(app['host'],app['service'])
       tr
         td
           = app['host']
@@ -39,7 +39,7 @@ table.ui.celled.table.datatable
       - @app_config['hosts'].each do |host|
         - unless host['services'].nil?
           - host['services'].each do |service|
-            - @dwt_entry = Rgmdwt::Listnagiosobject.get_downtime(host['host'],service)
+            - @dwt_entry = Rgmdwt::Api.get_downtime(host['host'],service)
             tr
               td
                 = host['host']
