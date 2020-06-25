@@ -37,10 +37,15 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    redirect_to view_conf_path(params[:id]), notice: 'Downtime was successfully created.'
+    redirect_to view_dwt_result_path(params[:id]), notice: 'Downtime was successfully created.'
+
   end
 
   def view_dwt
+    @app_config = Rgmdwt::Configuration.get_config(params[:id])
+  end
+
+  def view_dwt_result
     @app_config = Rgmdwt::Configuration.get_config(params[:id])
   end
 
