@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def appli_dwt
+    downtime = Array.new()
     target = Rgmdwt::Configuration.get_config(params[:id])
     target['app'].each do |app|
       Rgmdwt::Api.create_downtime(
@@ -18,8 +19,13 @@ class ApplicationController < ActionController::Base
         app['host'],
         app['service']
       )
+      downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
+          'application', app['host'], app['service'],
+          params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+      )
     end
     target['hosts'].each do |host|
+      specific_downtime = Array.new()
       Rgmdwt::Api.create_downtime(
         params[:description].first,
         DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
@@ -34,9 +40,30 @@ class ApplicationController < ActionController::Base
           host['host'],
           service
         )
+        downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
+            'service', host['host'], service,
+            params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+        )
+        unless host['mails'].nil?
+          specific_downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
+              'service', host['host'], service,
+              params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+          )
+        end
+      end
+      downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
+        'host', host['host'], '-',
+        params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+      )
+      unless host['mails'].nil?
+        specific_downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
+            'service', host['host'], '-',
+            params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+        )
+        Notifications::SendService.call(specific_downtime,host['mails']['addresses']) if host['mails']['engine'] == 'internal'
       end
     end
-
+    Notifications::SendService.call(downtime,target['mails']['addresses']) if target['mails']['engine'] == 'internal'
     redirect_to view_dwt_result_path(params[:id]), notice: 'Downtime was successfully created.'
 
   end

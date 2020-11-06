@@ -6,6 +6,18 @@ default: &default
   api_username: <%= ENV.fetch("RGMDWT_API_USERNAME") { 'admin' } %>
   api_password: <%= ENV.fetch("RGMDWT_API_PASSWORD") { 'admin' } %>
 
+  notification:
+    mail:
+      host: <%= ENV.fetch("MAIL_HOST") { nil } %>
+      port: <%= ENV.fetch("MAIL_POST") { nil } %>
+      user: <%= ENV.fetch("MAIL_USER") { nil } %>
+      pass: <%= ENV.fetch("MAIL_PASS") { nil } %>
+      type: <%= ENV.fetch("MAIL_AUTH_TYPE") { nil } %>
+      helo: <%= ENV.fetch("MAIL_HELO") { nil } %>
+      ssl:  <%= ENV.fetch("MAIL_SSL_ENABLE") { nil } %>
+      from: <%= ENV.fetch("MAIL_FROM") { 'RGM Downtime <no-reply@example.loc>' } %>
+      subject: <%= ENV.fetch("MAIL_SUBJECT") { 'RGM - New downtime apposed' } %>
+
 production:
   <<: *default
   timezone: <%= ENV.fetch("TZ") { 'Europe/Paris' } %>
