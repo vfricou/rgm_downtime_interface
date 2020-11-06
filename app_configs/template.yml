@@ -1,9 +1,25 @@
 displayname: "Template configuration"
+mails:
+  addresses:
+    - 'rgmmanager@example.org'
+  engine: 'internal'
 app:
   - host: Applications_BP
     service: Template
 hosts:
   - host: localhost
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_childs: false
+    mails:
+      addresses:
+        - 'rgmmanager@example.org'
+      engine: 'internal'
+  - host: rgmhost.example.org
     services:
       - memory
       - partitions
