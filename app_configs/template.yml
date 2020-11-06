@@ -20,12 +20,12 @@ hosts:
         - 'rgmmanager@example.org'
       engine: 'internal'
   - host: rgmhost.example.org
-      services:
-        - memory
-        - partitions
-        - processor
-        - systime
-        - uptime
-      propagation_childs: false
+    services:
+      - memory
+      - partitions
+      - processor
+      - systime
+      - uptime
+    propagation_childs: false
   - host: test-host
     propagation_childs: false
