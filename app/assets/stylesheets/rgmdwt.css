@@ -4,7 +4,9 @@ body {
 
 .main.container {
     margin-top: 7em;
+  padding: 4em;
 }
+
 .ui.footer.segment {
     margin: 5em 0em 0em;
     padding: 5em 0em;
@@ -23,13 +25,17 @@ body {
 .ui.menu.rgm{
   background-color: #286090;
   color: #fff;
-  height: 3em;
+  height: 4em;
 }
 .ui.menu .rgm{
   color: #fff;
+  font-size: x-large;
 }
 
 .ui.buttons .rgm{
   background-color: #286090;
   color: #fff;
+}
+.ui.table>tbody>tr>td.rgmalign {
+  text-align: center;
 }

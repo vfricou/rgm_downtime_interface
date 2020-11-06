@@ -4,8 +4,13 @@ h1.ui.center.aligned.header
 table.ui.table.table-striped.datatable
   thead
     tr
-      th = t('t_head_app')
-      th.left = t('t_head_description')
+      th
+        h2
+          = t('t_head_app')
+      th
+        h2
+          = t('t_head_description')
+      th
   tbody
     - Rgmdwt::Configuration.list_apps.each do |line|
       tr
@@ -29,10 +34,11 @@ table.ui.table.table-striped.datatable
                   div.ui.left.icon.input
                     = f.text_field :enddate, class: 'form-control datepicker', placeholder: t('time_pick_placeholder')
                     i.calendar.check.outline.icon
-              div class="ui segment"
-                div.ui.vertical.labeled.icon.buttons
-                  = button_tag(type: "submit", class: "ui button rgm") do
-                    i.check.icon
-                    = t('form_btn_apply')
-                  = link_to "<i class='eye icon'></i>#{t('form_btn_view')}".html_safe, view_dwt_result_path(line[:file_name]), class: 'ui grey button'
-                  = link_to "<i class='file alternate icon'></i>#{t('form_btn_config')}".html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
+        td.rgmalign
+          div.ui.icon.buttons
+            = button_tag(type: "submit", class: "ui button rgm") do
+              i.check.icon
+              = t('form_btn_apply')
+            div.ui.vertical.labeled.icon.buttons
+              = link_to "<i class='eye icon center'></i>#{t('form_btn_view')}".html_safe, view_dwt_result_path(line[:file_name]), class: 'ui grey button'
+              = link_to "<i class='file alternate icon'></i>#{t('form_btn_config')}".html_safe, view_conf_path(line[:file_name]), class: 'ui grey button'
