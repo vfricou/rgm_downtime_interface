@@ -63,7 +63,9 @@ class ApplicationController < ActionController::Base
         Notifications::SendService.call(specific_downtime,host['mails']['addresses']) if host['mails']['engine'] == 'internal'
       end
     end
-    Notifications::SendService.call(downtime,target['mails']['addresses']) if target['mails']['engine'] == 'internal'
+    unless target['mails'].nil?
+      Notifications::SendService.call(downtime,target['mails']['addresses']) if target['mails']['engine'] == 'internal'
+    end
     redirect_to view_dwt_result_path(params[:id]), notice: 'Downtime was successfully created.'
 
   end
