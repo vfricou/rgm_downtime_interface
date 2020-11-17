@@ -115,6 +115,7 @@ module Notifications
           message_content << "To: #{mail_to}\n"
           message = message_content + "\n" + message_body
           begin
+            Rails.logger.info "Sending mail to #{mail_to}"
             smtp.send_message message, Rails.configuration.rgmdwt[:notification][:mail][:from], mail_to
           rescue StandardError => e
             Rails.logger.error("Unable to send email with exception : #{e.message}")
