@@ -15,6 +15,13 @@ COPY app /app/app
 COPY bin /app/bin
 COPY config /app/config
 COPY lib /app/lib
+COPY public/assets /app/public/assets
+COPY public/404.html /app/public/404.html
+COPY public/422.html /app/public/422.html
+COPY public/500.html /app/public/500.html
+COPY public/apple-touch-icon.png /app/public/apple-touch-icon.png
+COPY public/apple-touch-icon-precomposed.png /app/public/apple-touch-icon-precomposed.png
+COPY public/robots.txt /app/public/robots.txt
 COPY babel.config.js /app/babel.config.js
 COPY config.ru /app/config.ru
 COPY Gemfile /app/Gemfile
@@ -25,7 +32,7 @@ COPY Rakefile /app/Rakefile
 COPY yarn.lock /app/yarn.lock
 
 RUN \
-  mkdir /app/log /app/public && \
+  mkdir /app/log && \
   bundle config set without 'development test' && \
   bundle install --jobs $(nproc) --retry 5 &&\
   bin/rake assets:precompile
