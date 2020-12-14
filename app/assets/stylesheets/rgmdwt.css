@@ -36,6 +36,6 @@ body {
   background-color: #286090;
   color: #fff;
 }
-.ui.table>tbody>tr>td.rgmalign {
-  text-align: center;
+div.rgmalign {
+  transform: translateY(25%);
 }

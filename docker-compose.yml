@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  rgm_dwt:
+    image: rgm_dwt:latest
+    ports:
+      - 3000:3000
+    volumes:
+      - /path/to/app_configs:/app/app_configs:ro
+    environment:
+      RGMDWT_API_SERVER: 'rgm.example.org'
+      RGMDWT_API_USERNAME: __Ch@ng3M3__
+      RGMDWT_API_PASSWORD: __Ch@ng3M3__
+      MAIL_HOST: 'mail.example.org'
+      MAIL_PORT: 25
+      MAIL_HELO: 'rgm.example.org'
+      MAIL_FROM: 'RGM Downtime <no-reply@example.org>'
+      SECRET_KEY_BASE: __Ch@ng3m3BEf0reRuN__
