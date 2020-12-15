@@ -20,8 +20,9 @@ class ApplicationController < ActionController::Base
         app['service']
       )
       downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
-          'application', app['host'], app['service'],
-          params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+        'application', app['host'], app['service'], params[:description],
+        DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+        DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S')
       )
     end
     target['hosts'].each do |host|
@@ -41,24 +42,28 @@ class ApplicationController < ActionController::Base
           service
         )
         downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
-            'service', host['host'], service,
-            params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+          'service', host['host'], service, params[:description],
+          DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+          DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S')
         )
         unless host['mails'].nil?
           specific_downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
-              'service', host['host'], service,
-              params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+            'service', host['host'], service, params[:description],
+            DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+            DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S')
           )
         end
       end
       downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
-        'host', host['host'], '-',
-        params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+        'host', host['host'], '-', params[:description],
+        DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+        DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S')
       )
       unless host['mails'].nil?
         specific_downtime.push Rgmdwt::Utils.generate_downtime_notif_data(
-            'service', host['host'], '-',
-            params[:description].to_s, params[:startdate].to_s, params[:enddate].to_s
+          'service', host['host'], '-', params[:description],
+          DateTime.parse(params[:startdate]).strftime('%d-%m-%Y %H:%M:%S'),
+          DateTime.parse(params[:enddate]).strftime('%d-%m-%Y %H:%M:%S')
         )
         Notifications::SendService.call(specific_downtime,host['mails']['addresses']) if host['mails']['engine'] == 'internal'
       end
