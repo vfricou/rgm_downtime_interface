@@ -92,8 +92,6 @@ module Notifications
         message_body << '  </tbody>'
         message_body << '</table>'
 
-
-        puts message_body.inspect
         auth_type = Rails.configuration.rgmdwt[:notification][:mail][:type].present? ? Rails.configuration.rgmdwt[:notification][:mail][:type] : nil
         smtp = Net::SMTP.new(
           Rails.configuration.rgmdwt[:notification][:mail][:host],
