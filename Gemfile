@@ -30,7 +30,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 
 # Include Slim
-gem 'slim-rails', '~> 3.2'
+gem 'slim-rails', '~> 3.3'
 
 # Include rest-client
 gem 'rest-client', '~>2.1.0'
