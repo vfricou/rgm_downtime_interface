@@ -48,6 +48,12 @@ module.exports = function(api) {
         }
       ],
       [
+        '@babel/preset-env',
+        {
+          loose: true
+        }
+      ],
+      [
         '@babel/plugin-proposal-object-rest-spread',
         {
           useBuiltIns: true
